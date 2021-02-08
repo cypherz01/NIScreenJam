@@ -2,40 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Move2d : MonoBehaviour
 {
     public float moveSpeed;
     public float jumpSpeed;
+
+    [HideInInspector]
+    public float mayJump;
     public bool isGrounded = false;
     public bool isleft = false;
-
+    public bool blocked;
+    public Vector3 movement;
+    
     // Start is called before the first frame update
     void Start()
     {
+         blocked = GameObject.Find("Player").GetComponentInChildren<wallCheck>().isblocked;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Jump();
-
         float inputHoriz = Input.GetAxis("Horizontal");
         float inputVert = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(inputHoriz, 0f, 0f);
-
-
+        movement = new Vector3(inputHoriz, 0f, 0f);
         Direction(inputHoriz);
-        transform.position += movement * Time.deltaTime * moveSpeed;
+        if (isGrounded) mayJump = 0.2f;
+    }
 
-
-
-
+    private void Update()
+    {
+        Jump();
+        mayJump -= Time.deltaTime;
+        if (!blocked) transform.position += movement * Time.deltaTime * moveSpeed;
     }
 
     void Jump()
     {
-        if ((Input.GetButtonDown("Jump")) && (isGrounded))
+        if ((Input.GetButtonDown("Jump")) && ((isGrounded)||(mayJump >0)))
         {
+            if ((mayJump > 0)&& (mayJump != 0.2f)) Debug.Log("cyote time.");
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpSpeed), ForceMode2D.Impulse);
             isGrounded = false;
         }
