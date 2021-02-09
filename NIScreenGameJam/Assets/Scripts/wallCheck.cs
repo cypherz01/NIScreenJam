@@ -16,11 +16,13 @@ public class wallCheck : MonoBehaviour
         if (collision.collider.tag == "Ground")
         {
             isblocked = true;
+            Debug.Log("wall");
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         isblocked = false;
+        Debug.Log("left wall");
     }
 }
