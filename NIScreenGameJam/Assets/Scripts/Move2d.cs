@@ -7,25 +7,32 @@ public class Move2d : MonoBehaviour
 {
     public float moveSpeed;
     public float jumpSpeed;
+    public bool isGrounded = false;
+    public bool isleft;
+
+    private Rigidbody2D rb;
 
     [HideInInspector]
-    public float mayJump;
-    public bool isGrounded = false;
-    public bool isleft = false;
-    public bool blocked;
-    public Vector3 movement;
+    float mayJump;
+    float jumpBufferTimer = 0f;
+    float buffermax = 0.3f;
+    float inputHoriz;
+
+    wallCheck blocked;
+
+    Vector3 movement;
     
     // Start is called before the first frame update
     void Start()
     {
-         blocked = GameObject.Find("Player").GetComponentInChildren<wallCheck>().isblocked;
+        blocked = GameObject.Find("Player").GetComponentInChildren<wallCheck>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float inputHoriz = Input.GetAxis("Horizontal");
-        float inputVert = Input.GetAxis("Vertical");
+        inputHoriz = Input.GetAxis("Horizontal");
         movement = new Vector3(inputHoriz, 0f, 0f);
         Direction(inputHoriz);
         if (isGrounded) mayJump = 0.2f;
@@ -33,24 +40,31 @@ public class Move2d : MonoBehaviour
 
     private void Update()
     {
-        Jump();
+        if ((isGrounded || mayJump > 0)&&(jumpBufferTimer < buffermax)){
+            Jump();
+            jumpBufferTimer = buffermax;
+        }
+        
         mayJump -= Time.deltaTime;
-        if (!blocked) transform.position += movement * Time.deltaTime * moveSpeed;
+        jumpBufferTimer += Time.deltaTime;
+
+        if (!blocked.isblocked) transform.position += movement * Time.deltaTime * moveSpeed;
+        if (Input.GetButtonDown("Jump")) jumpBufferTimer = 0;
+        if (Input.GetButtonUp("Jump") &&(rb.velocity.y >0))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 2);
+        }
     }
 
     void Jump()
     {
-        if ((Input.GetButtonDown("Jump")) && ((isGrounded)||(mayJump >0)))
-        {
-            if ((mayJump > 0)&& (mayJump != 0.2f)) Debug.Log("cyote time.");
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpSpeed), ForceMode2D.Impulse);
-            isGrounded = false;
-        }
+        rb.AddForce(new Vector2(0f, jumpSpeed), ForceMode2D.Impulse);
+        isGrounded = false;
     }
 
     void Direction(float input)
     {
-        Vector3 newScale = transform.localScale;
+        Vector2 newScale = transform.localScale;
 
         if ((input < 0) && (!isleft))   //going right to left
         {
