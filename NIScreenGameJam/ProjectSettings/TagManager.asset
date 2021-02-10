@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Letter
+  - Parcel
+  - platform
   layers:
   - Default
   - TransparentFX
