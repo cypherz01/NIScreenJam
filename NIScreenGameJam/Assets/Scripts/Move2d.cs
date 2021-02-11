@@ -17,16 +17,22 @@ public class Move2d : MonoBehaviour
     float jumpBufferTimer = 0f;
     float buffermax = 0.3f;
     float inputHoriz;
+    bool isdash = false;
 
     wallCheck blocked;
 
+
     Vector3 movement;
+
+    Transform startPos;
     
     // Start is called before the first frame update
     void Start()
     {
         blocked = GameObject.Find("Player").GetComponentInChildren<wallCheck>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+        startPos = GameObject.Find("startpos").GetComponent<Transform>();
+        GameObject.Find("Player").GetComponent<Transform>().position = startPos.position; 
     }
 
     // Update is called once per frame
@@ -44,6 +50,12 @@ public class Move2d : MonoBehaviour
             Jump();
             jumpBufferTimer = buffermax;
         }
+
+        if (isdash && isGrounded)
+        {
+            Jump();
+            isdash = false;
+        }
         
         mayJump -= Time.deltaTime;
         jumpBufferTimer += Time.deltaTime;
@@ -54,9 +66,24 @@ public class Move2d : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 2);
         }
+
+        if (Input.GetButtonDown("Fire1") && !isGrounded && rb.velocity.y<-4)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y *4);
+            isdash = true;
+        }
+        
+        if((rb.velocity.y < -4)&&(rb.velocity.y > -12))
+        {
+            GameObject.Find("Player").GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+        }
+        else
+        {
+            GameObject.Find("Player").GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+        }
     }
 
-    void Jump()
+    public void Jump()
     {
         rb.AddForce(new Vector2(0f, jumpSpeed), ForceMode2D.Impulse);
         isGrounded = false;

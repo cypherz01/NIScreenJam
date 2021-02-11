@@ -8,6 +8,7 @@ TagManager:
   - Letter
   - Parcel
   - platform
+  - Enemy
   layers:
   - Default
   - TransparentFX
