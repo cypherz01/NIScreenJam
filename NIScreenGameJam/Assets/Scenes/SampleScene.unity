@@ -465,7 +465,7 @@ Transform:
   m_LocalScale: {x: 1.4, y: 1.4, z: 0.7}
   m_Children: []
   m_Father: {fileID: 519420032}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &232202525
 GameObject:
@@ -581,7 +581,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 519420032}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &389576599
 GameObject:
@@ -801,9 +801,7 @@ Transform:
   m_Children:
   - {fileID: 1483970251}
   - {fileID: 1768578375}
-  - {fileID: 1625336044}
   - {fileID: 2099892558}
-  - {fileID: 1061089904}
   - {fileID: 208616101}
   - {fileID: 235922030}
   m_Father: {fileID: 0}
@@ -1236,73 +1234,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243585, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9028057816997243588, guid: 0e0c81dc730f53d40949b99cb55220b1,
-        type: 3}
-      propertyPath: m_Name
-      value: Dragon (7)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e0c81dc730f53d40949b99cb55220b1, type: 3}
 --- !u!1001 &1110673682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1983,7 +1914,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -9.3052635, y: 0.46866727}
+    - - {x: -9.298964, y: -4.02002}
+      - {x: -10.077557, y: -1.9807053}
+      - {x: -9.3052635, y: 0.46866727}
       - {x: -10.900283, y: 0.61985445}
       - {x: -16.71469, y: 0.72574186}
       - {x: -16.708857, y: -4.185317}
@@ -2461,7 +2394,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2175423175608763439
 PrefabInstance:
