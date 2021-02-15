@@ -31,7 +31,7 @@ public class Move2d : MonoBehaviour
     {
         blocked = GameObject.Find("Player").GetComponentInChildren<wallCheck>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        startPos = GameObject.Find("startpos").GetComponent<Transform>();
+        startPos = GameObject.Find("startpos_0").GetComponent<Transform>();
         GameObject.Find("Player").GetComponent<Transform>().position = startPos.position; 
     }
 
