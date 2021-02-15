@@ -1399,7 +1399,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9096792785531027510}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1361059766
 GameObject:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1672,7 +1671,6 @@ Transform:
   m_Father: {fileID: 519420032}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1847053044
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
