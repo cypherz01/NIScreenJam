@@ -6,28 +6,58 @@ using TMPro;
 namespace _Complete
 {
     public class Pickup : MonoBehaviour
+
     {
-        int Count;
+        public Text countText;
+        public Text countText2;
+
+        private int count;
+        private int parcelcount;
+        public bool destroyed;
 
         void Start()
         {
-            Count = 0;
+
+            destroyed = false;
+            count = 0;
+            parcelcount = 0;
+            SetCountText();
         }
-         void OnTriggerEnter2D(Collider2D other)
+        private void FixedUpdate()
         {
-            if (other.tag =="Letter")
+            destroyed = false;
+        }
+        void OnTriggerExit2D(Collider2D other)
+        {
+
+            if (destroyed == false && other.tag == "Letter")
             {
-                Count++;
-                //coinText.text = Count.ToString();
+                destroyed = true;
                 Destroy(other.gameObject);
+                count = count + 1;
+                SetCountText();
+               
 
             }
 
-            if (other.tag == "Parcel")
+            if (destroyed == false && other.tag == "Parcel")
             {
+                destroyed = true;
+                Destroy(other.gameObject);
+                parcelcount = parcelcount + 3;
+                SetCountText2();
                 
 
             }
+        }
+        void SetCountText()
+        {
+            countText.text = "" + count.ToString ();
+        }
+
+        void SetCountText2()
+        {
+            countText2.text = "" + parcelcount.ToString();
         }
     }
 }
