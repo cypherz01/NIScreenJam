@@ -9,6 +9,8 @@ TagManager:
   - Parcel
   - platform
   - Enemy
+  - Left
+  - Right
   layers:
   - Default
   - TransparentFX
