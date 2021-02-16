@@ -25,14 +25,17 @@ public class Move2d : MonoBehaviour
     Vector3 movement;
 
     Transform startPos;
-    
+
+    AudioSource audiosrc;
+
     // Start is called before the first frame update
     void Start()
     {
         blocked = GameObject.Find("Player").GetComponentInChildren<wallCheck>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         startPos = GameObject.Find("startpos_0").GetComponent<Transform>();
-        GameObject.Find("Player").GetComponent<Transform>().position = startPos.position; 
+        GameObject.Find("Player").GetComponent<Transform>().position = startPos.position;
+        audiosrc = GameObject.Find("AudioManager_jump").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -61,10 +64,15 @@ public class Move2d : MonoBehaviour
         jumpBufferTimer += Time.deltaTime;
 
         if (!blocked.isblocked) transform.position += movement * Time.deltaTime * moveSpeed;
-        if (Input.GetButtonDown("Jump")) jumpBufferTimer = 0;
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferTimer = 0;
+        }
+
         if (Input.GetButtonUp("Jump") &&(rb.velocity.y >0))
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 2);
+            
         }
 
         if (Input.GetButtonDown("Fire1") && !isGrounded && rb.velocity.y<-4)
@@ -81,12 +89,14 @@ public class Move2d : MonoBehaviour
         {
             GameObject.Find("Player").GetComponent<Renderer>().material.SetColor("_Color", Color.white);
         }
+
     }
 
     public void Jump()
     {
         rb.AddForce(new Vector2(0f, jumpSpeed), ForceMode2D.Impulse);
         isGrounded = false;
+        audiosrc.Play();
     }
 
     void Direction(float input)

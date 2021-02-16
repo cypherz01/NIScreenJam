@@ -6,10 +6,12 @@ public class GroundCheck : MonoBehaviour
 {
     GameObject Player;
     GameObject Enemy;
+    AudioSource audiosrc;
     // Start is called before the first frame update
     void Start()
     {
         Player = gameObject.transform.parent.gameObject;
+        audiosrc = GameObject.Find("AudioManager_hit").GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -25,6 +27,7 @@ public class GroundCheck : MonoBehaviour
             Enemy = collision.gameObject;
             Enemy.GetComponent<Move2dEnemy>().health--;
             Enemy.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            audiosrc.Play();
 
 
             if (Enemy.GetComponent<Move2dEnemy>().health == 0)
