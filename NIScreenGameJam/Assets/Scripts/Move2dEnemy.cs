@@ -22,7 +22,7 @@ public class Move2dEnemy : MonoBehaviour
     void Start()
     {
         
-        blocked = GameObject.Find("Troll").GetComponentInChildren<wallCheck>();
+        blocked = gameObject.GetComponentInChildren<wallCheck>();
         movement = new Vector2(direction, 0f);
 
         health = 3.0f;
@@ -37,25 +37,25 @@ public class Move2dEnemy : MonoBehaviour
 
         if (counter > 10)
         {
-            GameObject.Find("Troll").GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
             counter = 0;
         }
         counter++;
-    }
 
-    private void Update()
-    {
         if (!blocked.isblocked)
         {
             movement.x = direction * moveSpeed * Time.deltaTime;
             transform.Translate(movement);
+            blocked.isblocked = false;
+
         }
         else
         {
             direction *= -1;
             Direction(direction); ;
         }
-     }
+    }
+
     void Direction(float input)
     {
         Vector2 newScale = transform.localScale;
