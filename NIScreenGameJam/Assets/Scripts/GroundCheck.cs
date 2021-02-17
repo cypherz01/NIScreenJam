@@ -16,8 +16,9 @@ public class GroundCheck : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.collider.tag == "Ground") || (collision.collider.tag == "Enemy"))
+        if ((collision.collider.tag == "Ground") || (collision.collider.tag == "Enemy") || (collision.collider.tag == "platform"))
         {
+            Debug.Log("landed on" + collision.collider.tag);
             Player.GetComponent<Move2d>().isGrounded = true;
             GameObject.Find("Player").GetComponent<Renderer>().material.SetColor("_Color", Color.white);
         }
@@ -40,14 +41,23 @@ public class GroundCheck : MonoBehaviour
  
 
         }
+
+        if (collision.collider.tag == "platform")
+        {
+            Player.transform.SetParent(collision.transform);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if ((collision.collider.tag == "Ground")|| (collision.collider.tag == "Enemy" +
-            ""))
+        if ((collision.collider.tag == "Ground")|| (collision.collider.tag == "Enemy")|| (collision.collider.tag == "platform"))
         {
             Player.GetComponent<Move2d>().isGrounded = false;
         }
+
+        if ((collision.collider.tag == "platform"))
+        Player.transform.parent = null;
+
+
     }
 }
