@@ -118,18 +118,4 @@ public class Move2d : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        isGrounded = true;
-        if (other.CompareTag("platform"))
-        {
-            transform.SetParent(other.transform);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        transform.parent = null;
-    }
-
 }

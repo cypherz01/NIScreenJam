@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4950313558462821188}
   - component: {fileID: 4950313558462821191}
   - component: {fileID: 4950313558462821190}
+  - component: {fileID: 1075973335439854831}
   m_Layer: 0
   m_Name: Platforms0_prefab
   m_TagString: Ground
@@ -109,3 +110,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.3567162, y: 2.3335972}
   m_EdgeRadius: 0
+--- !u!95 &1075973335439854831
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4950313558462821193}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 146a742c663eaa3409dda0395f316737, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
