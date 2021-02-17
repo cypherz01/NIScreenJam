@@ -17,9 +17,11 @@ public class Move2dEnemy : MonoBehaviour
 
     Vector3 movement;
 
+
     // Start is called before the first frame update
     void Start()
     {
+        
         blocked = GameObject.Find("Troll").GetComponentInChildren<wallCheck>();
         movement = new Vector2(direction, 0f);
 

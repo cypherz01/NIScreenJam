@@ -15,6 +15,8 @@ namespace _Complete
         private int parcelcount;
         public bool destroyed;
 
+        AudioSource audiosrc;
+
         void Start()
         {
 
@@ -22,6 +24,7 @@ namespace _Complete
             count = 0;
             parcelcount = 0;
             SetCountText();
+            audiosrc = GameObject.Find("AudioManager_pickup").GetComponent<AudioSource>();
         }
         private void FixedUpdate()
         {
@@ -36,6 +39,7 @@ namespace _Complete
                 Destroy(other.gameObject);
                 count = count + 1;
                 SetCountText();
+                audiosrc.Play();
                
 
             }
@@ -46,7 +50,8 @@ namespace _Complete
                 Destroy(other.gameObject);
                 parcelcount = parcelcount + 3;
                 SetCountText2();
-                
+                audiosrc.Play();
+
 
             }
         }

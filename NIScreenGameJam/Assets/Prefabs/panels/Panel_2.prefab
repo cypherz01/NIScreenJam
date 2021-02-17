@@ -2267,7 +2267,7 @@ PrefabInstance:
     - target: {fileID: 6703093181323998381, guid: 34e12722f6cb44f13a90c24fa77dcb6c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.2207031
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6703093181323998381, guid: 34e12722f6cb44f13a90c24fa77dcb6c,
         type: 3}
@@ -2307,7 +2307,7 @@ PrefabInstance:
     - target: {fileID: 8630085085172636917, guid: 34e12722f6cb44f13a90c24fa77dcb6c,
         type: 3}
       propertyPath: m_Name
-      value: Untitled (6) 3_0 (2)
+      value: parcel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34e12722f6cb44f13a90c24fa77dcb6c, type: 3}
