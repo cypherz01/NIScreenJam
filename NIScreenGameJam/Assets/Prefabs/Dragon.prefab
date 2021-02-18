@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9028057816997243585}
   - component: {fileID: 9028057816997243586}
-  - component: {fileID: 9028057816997243587}
+  - component: {fileID: 858545457094391433}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Letter
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1666102461
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -8105497190023009109, guid: de29a62873d634f078c6e93a6816be2b,
     type: 3}
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &9028057816997243587
-CapsuleCollider2D:
+--- !u!61 &858545457094391433
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -96,6 +96,16 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.5999999, y: 1.5999999}
-  m_Direction: 0
+  m_Offset: {x: 0.00989753, y: 0.0074233413}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.78, y: 1.3001269}
+    newSize: {x: 1.6, y: 1.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.1264248, y: 1.56242}
+  m_EdgeRadius: 0
