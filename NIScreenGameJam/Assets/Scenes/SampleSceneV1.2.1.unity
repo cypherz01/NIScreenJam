@@ -4069,6 +4069,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_0
       objectReference: {fileID: 0}
+    - target: {fileID: 5584095782942832983, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: dialogue.name
+      value: Fetch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584095782942832983, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584095782942832983, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Looks like my boss has left a note for me...
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584095782942832983, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: If I press X I can see what it says.
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ede3e5faf3f9d74896bc350c49d9e1b, type: 3}
 --- !u!1001 &1085194223953732783
