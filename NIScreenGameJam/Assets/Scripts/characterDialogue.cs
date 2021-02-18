@@ -21,7 +21,7 @@ public class characterDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X) && atboard)
+        if (Input.GetKeyDown(KeyCode.Return) && atboard)
         {
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
         }
