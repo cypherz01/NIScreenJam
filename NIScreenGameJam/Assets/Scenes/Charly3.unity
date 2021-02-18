@@ -842,6 +842,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1559187267}
     m_Modifications:
+    - target: {fileID: 6400723471058846008, guid: 6bf54686f9153054ab9045a6d7557508,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400723471058846008, guid: 6bf54686f9153054ab9045a6d7557508,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1512415300}
+    - target: {fileID: 6400723471058846008, guid: 6bf54686f9153054ab9045a6d7557508,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 8689645004189038521, guid: 6bf54686f9153054ab9045a6d7557508,
         type: 3}
       propertyPath: m_Name
@@ -4030,7 +4045,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: faq
+  m_text: Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -5109,7 +5124,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FAQ
+  m_text: Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -5199,7 +5214,7 @@ GameObject:
   - component: {fileID: 1845442041}
   - component: {fileID: 1845442040}
   m_Layer: 5
-  m_Name: FAQButton
+  m_Name: CREDButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5329,7 +5344,7 @@ GameObject:
   - component: {fileID: 1880294701}
   - component: {fileID: 1880294700}
   m_Layer: 5
-  m_Name: FAQButton
+  m_Name: CREDButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6222,6 +6237,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_0
       objectReference: {fileID: 0}
+    - target: {fileID: 5584095782942832983, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: dialogue.name
+      value: Fetch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584095782942832983, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Hmmm...
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584095782942832983, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: Look like the boss left me a letter here...
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584095782942832983, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: If I press 'X' I can see what it is!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ede3e5faf3f9d74896bc350c49d9e1b, type: 3}
 --- !u!1001 &1085194223953732783
@@ -6633,6 +6668,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 324088712}
     m_Modifications:
+    - target: {fileID: 916000670322284798, guid: e51fdd6afb23d1a4ba558b86188b8acc,
+        type: 3}
+      propertyPath: dialogue.name
+      value: 'Scarecrow '
+      objectReference: {fileID: 0}
+    - target: {fileID: 916000670322284798, guid: e51fdd6afb23d1a4ba558b86188b8acc,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 916000670322284798, guid: e51fdd6afb23d1a4ba558b86188b8acc,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: ARRRRRRGHHHHHHHHHHHHHH!!!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 916000670322284798, guid: e51fdd6afb23d1a4ba558b86188b8acc,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: 'Oh, s-sorry lad- '
+      objectReference: {fileID: 0}
+    - target: {fileID: 916000670322284798, guid: e51fdd6afb23d1a4ba558b86188b8acc,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: I thoughts you weres a crow!
+      objectReference: {fileID: 0}
+    - target: {fileID: 916000670322284798, guid: e51fdd6afb23d1a4ba558b86188b8acc,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: Is that parcel for me?
+      objectReference: {fileID: 0}
+    - target: {fileID: 916000670322284798, guid: e51fdd6afb23d1a4ba558b86188b8acc,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[4]
+      value: Try 'n look less crowey next times.
+      objectReference: {fileID: 0}
     - target: {fileID: 4240398506863468005, guid: e51fdd6afb23d1a4ba558b86188b8acc,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -6820,6 +6890,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 324088712}
     m_Modifications:
+    - target: {fileID: 60138139748373016, guid: f781de72d56bc0d419b9c9546d38513f,
+        type: 3}
+      propertyPath: dialogue.name
+      value: Fisherman
+      objectReference: {fileID: 0}
+    - target: {fileID: 60138139748373016, guid: f781de72d56bc0d419b9c9546d38513f,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 60138139748373016, guid: f781de72d56bc0d419b9c9546d38513f,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[0]
+      value: Hey there fella- That mail for me?
+      objectReference: {fileID: 0}
+    - target: {fileID: 60138139748373016, guid: f781de72d56bc0d419b9c9546d38513f,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: Oooh! It's my new fishing tackle!
+      objectReference: {fileID: 0}
+    - target: {fileID: 60138139748373016, guid: f781de72d56bc0d419b9c9546d38513f,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: 'The Wizard dried up my lake- '
+      objectReference: {fileID: 0}
+    - target: {fileID: 60138139748373016, guid: f781de72d56bc0d419b9c9546d38513f,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: but it's bound to rain around here sometime, right?
+      objectReference: {fileID: 0}
     - target: {fileID: 3149060486592613718, guid: f781de72d56bc0d419b9c9546d38513f,
         type: 3}
       propertyPath: m_RootOrder
