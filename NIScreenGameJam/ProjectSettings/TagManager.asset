@@ -12,6 +12,7 @@ TagManager:
   - Left
   - Parcel
   - Vert
+  - end
   layers:
   - Default
   - TransparentFX

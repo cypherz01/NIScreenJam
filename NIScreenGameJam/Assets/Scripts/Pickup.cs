@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace _Complete
 {
@@ -27,7 +28,7 @@ namespace _Complete
         {
             destroyed = false;
         }
-        void OnTriggerExit2D(Collider2D other)
+        void OnTriggerEnter2D(Collider2D other)
         {
 
             if (destroyed == false && other.tag == "Letter")
@@ -46,6 +47,11 @@ namespace _Complete
                 parcelcount = parcelcount + 1;
                 SetCountText2();
                 audiosrc.Play();
+            }
+
+            if(other.tag == "end")
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
         void SetCountText()
