@@ -8,12 +8,16 @@ public class worldedges : MonoBehaviour
     Vector3 newCamPos;
     GameObject player;
     int count;
+    AudioSource audioboss;
+    AudioSource audioback;
 
     private void Start()
     {
         count = 0;
         newCamPos = PanelManager.goRight("cam").transform.position;
         GameObject.Find("MainCam").GetComponent<Transform>().transform.position = newCamPos;
+        audioboss = GameObject.Find("BackgroundMusic_boss").GetComponent<AudioSource>();
+        audioback = GameObject.Find("BackgroundMusic").GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -35,6 +39,12 @@ public class worldedges : MonoBehaviour
             if (PanelManager.i % 2 == 0) PanelManager.i += 1;
             PanelManager.i += 1;
             PanelManager.y += 1;
+
+            if (PanelManager.y == 5)
+            {
+                audioboss.Play();
+                audioback.volume = 0;
+            }
 
             if(PanelManager.y > 5)
             {
@@ -68,6 +78,10 @@ public class worldedges : MonoBehaviour
                 collision.GetComponentInParent<Transform>().transform.position = newPos;
                 GameObject.Find("MainCam").GetComponent<Transform>().transform.position = newCamPos;
             }
+
+            
+                audioback.volume = 1;
+                audioboss.Pause();
 
         }
 
