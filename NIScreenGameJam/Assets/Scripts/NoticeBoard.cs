@@ -8,6 +8,15 @@ public class NoticeBoard : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject NoticeboardUI;
+    public Dialogue dialogue;
+
+    bool atboard;
+
+    private void Start()
+    {
+        NoticeboardUI.SetActive(false);
+        atboard = false;
+    }
 
 
     // Update is called once per frame
@@ -25,6 +34,11 @@ public class NoticeBoard : MonoBehaviour
                 Pause();
 
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.X) && atboard)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
         }
     }
 
@@ -50,5 +64,15 @@ public class NoticeBoard : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quitting game...");
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        atboard = true;
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        atboard = false;
     }
 }
