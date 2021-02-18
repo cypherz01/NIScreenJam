@@ -18,7 +18,7 @@ public class characterDialogue : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X) && atboard)
+        if (Input.GetKeyDown(KeyCode.Return) && atboard)
         {
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
         }

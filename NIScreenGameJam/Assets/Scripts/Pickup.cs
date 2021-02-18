@@ -43,7 +43,7 @@ namespace _Complete
             {
                 destroyed = true;
                 Destroy(other.gameObject);
-                parcelcount = parcelcount + 3;
+                parcelcount = parcelcount + 1;
                 SetCountText2();
                 audiosrc.Play();
             }

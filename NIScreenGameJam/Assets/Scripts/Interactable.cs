@@ -13,7 +13,7 @@ public class Interactable : MonoBehaviour
         if (triggering)
         {
             Debug.Log("Within Range");
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Return))
             {
                 Debug.Log("Pressed the Interact Button");
                 Diag.TriggerDialogue();
