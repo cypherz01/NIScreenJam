@@ -6132,11 +6132,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -9.48
       objectReference: {fileID: 0}
+    - target: {fileID: 864552558072270793, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 864552558259088263, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 864552558778471616, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
         type: 3}
       propertyPath: PanelManager
       value: 
       objectReference: {fileID: 1204638535}
+    - target: {fileID: 864552558814016905, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 864552559005467736, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 864552559688056866, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
         type: 3}
       propertyPath: m_RootOrder
@@ -6196,6 +6216,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Panel_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905714103925369014, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4334573203791031733, guid: 1ede3e5faf3f9d74896bc350c49d9e1b,
         type: 3}
