@@ -26,6 +26,8 @@ public class deathScript : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            collision.GetComponent<Rigidbody2D>().velocity = new Vector2 (0f,0f);
+            collision.GetComponent<Move2d>().canmove = false;
             collision.GetComponent<Rigidbody2D>().position = respawn.transform.position;
             cam.transform.position = cam_respawn.transform.position;
             Panelmanager.GetComponent<PanelManager>().i = 0;

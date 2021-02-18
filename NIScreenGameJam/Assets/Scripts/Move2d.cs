@@ -18,6 +18,7 @@ public class Move2d : MonoBehaviour
     float buffermax = 0.3f;
     float inputHoriz;
     bool isdash = false;
+    public bool canmove;
 
     wallCheck blocked;
 
@@ -31,6 +32,7 @@ public class Move2d : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canmove = true;
         blocked = GameObject.Find("Player").GetComponentInChildren<wallCheck>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         startPos = GameObject.Find("startpos_0").GetComponent<Transform>();
@@ -45,6 +47,7 @@ public class Move2d : MonoBehaviour
         movement = new Vector3(inputHoriz, 0f, 0f);
         Direction(inputHoriz);
         if (isGrounded) mayJump = 0.2f;
+        if(!canmove) canmove = true;
     }
 
     private void Update()
@@ -63,7 +66,7 @@ public class Move2d : MonoBehaviour
         mayJump -= Time.deltaTime;
         jumpBufferTimer += Time.deltaTime;
 
-        if (!blocked.isblocked) transform.position += movement * Time.deltaTime * moveSpeed;
+        if (!blocked.isblocked && canmove) transform.position += movement * Time.deltaTime * moveSpeed;
         if (Input.GetButtonDown("Jump"))
         {
             jumpBufferTimer = 0;
