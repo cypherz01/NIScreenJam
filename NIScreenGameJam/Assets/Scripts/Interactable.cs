@@ -8,11 +8,6 @@ public class Interactable : MonoBehaviour
     private bool triggering;
     public DialogueTrigger Diag;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if (triggering)

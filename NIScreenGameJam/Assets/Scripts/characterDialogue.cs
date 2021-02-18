@@ -7,10 +7,8 @@ public class characterDialogue : MonoBehaviour
 
     public GameObject PressEnter;
     public Dialogue dialogue;
-
     bool atboard;
 
-    // Start is called before the first frame update
     void Start()
     {
         PressEnter.SetActive(false);
@@ -18,14 +16,12 @@ public class characterDialogue : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.X) && atboard)
         {
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
         }
-
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

@@ -10,16 +10,13 @@ namespace _Complete
     {
         public Text countText;
         public Text countText2;
-
         private int count;
         private int parcelcount;
         public bool destroyed;
-
         AudioSource audiosrc;
 
         void Start()
         {
-
             destroyed = false;
             count = 0;
             parcelcount = 0;
@@ -40,8 +37,6 @@ namespace _Complete
                 count = count + 1;
                 SetCountText();
                 audiosrc.Play();
-               
-
             }
 
             if (destroyed == false && other.tag == "Parcel")
@@ -51,8 +46,6 @@ namespace _Complete
                 parcelcount = parcelcount + 3;
                 SetCountText2();
                 audiosrc.Play();
-
-
             }
         }
         void SetCountText()

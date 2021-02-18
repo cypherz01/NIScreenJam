@@ -9,7 +9,6 @@ public class Move2d : MonoBehaviour
     public float jumpSpeed;
     public bool isGrounded = false;
     public bool isleft;
-
     private Rigidbody2D rb;
 
     [HideInInspector]
@@ -21,15 +20,10 @@ public class Move2d : MonoBehaviour
     public bool canmove;
 
     wallCheck blocked;
-
-
     Vector3 movement;
-
     Transform startPos;
-
     AudioSource audiosrc;
 
-    // Start is called before the first frame update
     void Start()
     {
         canmove = true;
@@ -40,12 +34,12 @@ public class Move2d : MonoBehaviour
         audiosrc = GameObject.Find("AudioManager_jump").GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         inputHoriz = Input.GetAxis("Horizontal");
         movement = new Vector3(inputHoriz, 0f, 0f);
         Direction(inputHoriz);
+
         if (isGrounded) mayJump = 0.2f;
         if(!canmove) canmove = true;
     }

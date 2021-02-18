@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BackGroundAudio : MonoBehaviour
 {
-
     public static BackGroundAudio bgAudio;
 
     private void Awake()
@@ -17,8 +16,6 @@ public class BackGroundAudio : MonoBehaviour
 
         bgAudio = this;
         DontDestroyOnLoad(this);
-        
     }
-
 }
     

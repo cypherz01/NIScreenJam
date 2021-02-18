@@ -7,7 +7,6 @@ public class GroundCheck : MonoBehaviour
     GameObject Player;
     GameObject Enemy;
     AudioSource audiosrc;
-    // Start is called before the first frame update
     void Start()
     {
         Player = gameObject.transform.parent.gameObject;
@@ -57,7 +56,5 @@ public class GroundCheck : MonoBehaviour
 
         if ((collision.collider.tag == "platform"))
         Player.transform.parent = null;
-
-
     }
 }

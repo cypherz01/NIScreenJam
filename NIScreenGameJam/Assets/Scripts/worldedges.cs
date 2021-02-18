@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class worldedges : MonoBehaviour
 {
+    public PanelManager PanelManager;
+
     Vector3 newPos;
     Vector3 newCamPos;
-
     GameObject player;
     int count;
-
-    public PanelManager PanelManager;
 
     private void Start()
     {
@@ -76,18 +73,13 @@ public class worldedges : MonoBehaviour
 
         else if (collision.tag == "Player" && gameObject.tag == "Vert")
         {
-            
-                player = GameObject.Find("Player");
-
-            
+            player = GameObject.Find("Player");
 
             if (player.GetComponent<Rigidbody2D>().velocity.y > 0)
             {
-
-            
-                    PanelManager.y += 1;
-                    newCamPos = PanelManager.goRight("cam").transform.position;
-                    GameObject.Find("MainCam").GetComponent<Transform>().transform.position = newCamPos;
+                PanelManager.y += 1;
+                newCamPos = PanelManager.goRight("cam").transform.position;
+                GameObject.Find("MainCam").GetComponent<Transform>().transform.position = newCamPos;
                 this.GetComponent<Collider2D>().enabled = false;
                 this.transform.position = new Vector3 (this.transform.position.x,this.transform.position.y-4f, this.transform.position.z);
                 count = 0;
@@ -95,19 +87,13 @@ public class worldedges : MonoBehaviour
             }
             else
             {
-
-                    PanelManager.y -= 1;
-                    newCamPos = PanelManager.goLeft("cam").transform.position;
-                    GameObject.Find("MainCam").GetComponent<Transform>().transform.position = newCamPos;
+                PanelManager.y -= 1;
+                newCamPos = PanelManager.goLeft("cam").transform.position;
+                GameObject.Find("MainCam").GetComponent<Transform>().transform.position = newCamPos;
                 this.GetComponent<Collider2D>().enabled = false;
                 this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 4f, this.transform.position.z);
                 count = 0;
-
             }
-
-
         }
-
-
     }
 }

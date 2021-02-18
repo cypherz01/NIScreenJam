@@ -9,7 +9,7 @@ public class deathScript : MonoBehaviour
     GameObject cam_respawn;
     GameObject Panelmanager;
     new AudioSource audio;
-    // Start is called before the first frame update
+
     void Start()
     {
         respawn = GameObject.Find("startpos_0");
@@ -19,8 +19,6 @@ public class deathScript : MonoBehaviour
         audio = GameObject.Find("AudioManager_Death").GetComponent<AudioSource>(); 
         
     }
-
-    // Update is called once per fram
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

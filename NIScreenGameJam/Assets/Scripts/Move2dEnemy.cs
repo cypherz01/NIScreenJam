@@ -8,26 +8,18 @@ public class Move2dEnemy : MonoBehaviour
     public float jumpSpeed;
     public bool isleft;
     public float direction = -1f;
-
     public float health;
     float counter;
 
-
     wallCheck blocked;
-
     Vector3 movement;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        
         blocked = gameObject.GetComponentInChildren<wallCheck>();
         movement = new Vector2(direction, 0f);
-
         health = 3.0f;
         counter = 0;
-
     }
 
     // Update is called once per frame
@@ -72,7 +64,5 @@ public class Move2dEnemy : MonoBehaviour
             transform.localScale = newScale;
             isleft = false;
         }
-
     }
-
 }

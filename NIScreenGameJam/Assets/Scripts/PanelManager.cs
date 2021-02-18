@@ -9,7 +9,7 @@ public class PanelManager : MonoBehaviour
 
     public int i;
     public int y;
-    // Start is called before the first frame update
+
     void Start()
     {
         i = 1;
@@ -17,36 +17,30 @@ public class PanelManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     public GameObject goLeft(string name)
     {
-        if (name == "pos") {
-           
+        if (name == "pos") 
+        {
             Debug.Log(i);
             return positions[i];
         }
         else if (name == "cam")
         {
-            
             Debug.Log(y);
             return Cams[y];
         }
         return null;
-
-
     }
 
     public GameObject goRight(string name)
     {
         if (name == "pos")
         {
-           
             Debug.Log(i);
             return positions[i];
         }
         else if (name == "cam")
         {
-            
             Debug.Log(y);
             return Cams[y];
         }

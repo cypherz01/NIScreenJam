@@ -5,18 +5,15 @@ using UnityEngine;
 public class NoticeBoard : MonoBehaviour
 {
 
-    public static bool GameIsPaused = false;
-
+    public static bool GameIsPaused;
     public GameObject NoticeboardUI;
 
     private void Start()
     {
         NoticeboardUI.SetActive(false);
+        GameIsPaused = false;
     }
 
-
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
@@ -24,12 +21,10 @@ public class NoticeBoard : MonoBehaviour
             if (GameIsPaused)
             {
                 Resume();
-
             }
             else
             {
                 Pause();
-
             }
         }
     }
