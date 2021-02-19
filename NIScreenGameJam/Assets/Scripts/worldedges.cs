@@ -80,7 +80,7 @@ public class worldedges : MonoBehaviour
             }
 
             
-                audioback.volume = 1;
+                audioback.volume = 0.5f;
                 audioboss.Pause();
 
         }
