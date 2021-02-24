@@ -78,7 +78,7 @@ public class Move2d : MonoBehaviour
             isdash = true;
         }
         
-        if((rb.velocity.y < -4)&&(rb.velocity.y > -12))
+       /* if((rb.velocity.y < -4)&&(rb.velocity.y > -12))
         {
             GameObject.Find("Player").GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
         }
@@ -86,6 +86,7 @@ public class Move2d : MonoBehaviour
         {
             GameObject.Find("Player").GetComponent<Renderer>().material.SetColor("_Color", Color.white);
         }
+       */
 
     }
 

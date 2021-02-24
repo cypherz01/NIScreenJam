@@ -22,8 +22,8 @@ public class worldedges : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(count <= 50) count++;
-        if (this.GetComponent<Collider2D>().enabled == false && count >= 50)
+        if(count <= 30) count++;
+        if (this.GetComponent<Collider2D>().enabled == false && count >= 30)
         {
             Debug.Log("Setting true");
             this.GetComponent<Collider2D>().enabled = true;
@@ -80,7 +80,7 @@ public class worldedges : MonoBehaviour
             }
 
             
-                audioback.volume = 0.5f;
+                audioback.volume = 0.25f;
                 audioboss.Pause();
 
         }
@@ -95,7 +95,7 @@ public class worldedges : MonoBehaviour
                 newCamPos = PanelManager.goRight("cam").transform.position;
                 GameObject.Find("MainCam").GetComponent<Transform>().transform.position = newCamPos;
                 this.GetComponent<Collider2D>().enabled = false;
-                this.transform.position = new Vector3 (this.transform.position.x,this.transform.position.y-4f, this.transform.position.z);
+                this.transform.position = new Vector3 (this.transform.position.x,this.transform.position.y-5f, this.transform.position.z);
                 count = 0;
              
             }
@@ -105,7 +105,7 @@ public class worldedges : MonoBehaviour
                 newCamPos = PanelManager.goLeft("cam").transform.position;
                 GameObject.Find("MainCam").GetComponent<Transform>().transform.position = newCamPos;
                 this.GetComponent<Collider2D>().enabled = false;
-                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 4f, this.transform.position.z);
+                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 5f, this.transform.position.z);
                 count = 0;
             }
         }
