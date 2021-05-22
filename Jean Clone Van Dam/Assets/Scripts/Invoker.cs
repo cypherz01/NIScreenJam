@@ -52,7 +52,7 @@ public class Invoker : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
 
         }
-        //oppCommandBuffer.Clear();
+        oppCommandBuffer.Clear();
         co_running = false;
          //this is were the wait will happen. so position it in your func where you want to wait.
     }

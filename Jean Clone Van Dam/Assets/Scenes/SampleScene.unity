@@ -184,6 +184,8 @@ MonoBehaviour:
   down: s
   left: a
   right: d
+  punch: l
+  kick: p
   undo: m
   replay: r
   startPoint: {fileID: 1393080113}
@@ -505,6 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afeb9ce14e62f5448c140d6cd1a805c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionTimes: []
 --- !u!65 &1009932683
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -628,6 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afeb9ce14e62f5448c140d6cd1a805c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionTimes: []
 --- !u!65 &1115564054
 BoxCollider:
   m_ObjectHideFlags: 0
