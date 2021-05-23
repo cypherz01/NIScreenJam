@@ -23,6 +23,8 @@ public class InputManager : MonoBehaviour
     public Transform startPoint;
     public Transform oppStartPoint;
 
+    public GameObject PlayerArm;
+
     public Invoker opponent;
 
 
@@ -66,7 +68,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(punch))
         {
-            SendMoveCommand(invoker.transform, Vector3.right, 1f);
+            SendFightCommand(PlayerArm.GetComponent<Transform>(), Vector3.right, 1f);
             SendOppCommand(opponent.transform, Vector3.left, 1f);
             time = 0;
         }
@@ -95,6 +97,12 @@ public class InputManager : MonoBehaviour
     private void SendMoveCommand(Transform objectToMove, Vector3 direction, float distance)
     {
         ICommand movement = new Move(objectToMove, direction, distance);
+        Invoker.AddCommand(movement);
+    }
+
+    private void SendFightCommand(Transform objectToMove, Vector3 direction, float distance)
+    {
+        ICommand movement = new Punch(objectToMove, direction, distance);
         Invoker.AddCommand(movement);
     }
 

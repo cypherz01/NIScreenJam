@@ -27,28 +27,23 @@ public class Move : ICommand
 
 }
 
-public class Fight : ICommand
+public class Punch : ICommand
 {
     [SerializeField]
     private Vector3 direction = Vector3.zero;
     private float distance;
-    private GameObject objectToMove;
-    private GameObject objectToHit;
+    private Transform fist;
 
-    public Fight(GameObject objectToMove, GameObject objectToHit, Vector3 direction, float distance = 1f)
+    public Punch(Transform fist, Vector3 direction, float distance = 1f)
     {
         this.direction = direction;
-        this.objectToMove = objectToMove;
-        this.objectToHit = objectToMove;
+        this.fist = fist;
         this.distance = distance;
     }
 
     public void Execute()
     {
-        if (objectToHit != null)
-        {
-            objectToHit.GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
-        }
+        fist.position += direction * distance;
     }
 
     public void Undo()
