@@ -5,29 +5,31 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     [SerializeField]
-    public String up;
+    public String jump;
     [SerializeField]
-    public String down;
+    public String block;
     [SerializeField]
     public String left;
     [SerializeField]
     public String right;
     [SerializeField]
-    public String punch;
+    public String lightAttack;
     [SerializeField]
     public String kick;
     [SerializeField]
     public String undo;
     [SerializeField]
     public String replay;
-    public Transform startPoint;
-    public Transform oppStartPoint;
-
-    public GameObject PlayerArm;
-
+    public Transform player;
+    public Transform opponentChar;
+    Transform playerStart;
+    Transform oppStart;
+    public Animator playerAnim;
+    public Rigidbody2D playerRb;
     public Invoker opponent;
-
-
+    [SerializeField]
+    float jumpForce = 10f;
+    public GroundCheck groundCheck;
     [SerializeField]
     private Invoker invoker;
     [SerializeField]
@@ -37,17 +39,27 @@ public class InputManager : MonoBehaviour
     private float time = 0;
 
 
+    private void Start()
+    {
+        oppStart = opponentChar;
+        playerStart = player;
+    }
+
+
     void Update()
     {
 
-        if (Input.GetKeyDown(up))
+        if (Input.GetKeyDown(jump) && groundCheck.isGrounded)
         {
-            SendMoveCommand(invoker.transform, Vector3.up, 1f);
+            playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            groundCheck.isGrounded = false;
+            
+            // SendMoveCommand(invoker.transform, Vector3.up, 1f);
             SendOppCommand(opponent.transform, Vector3.up, 1f);
             time = 0;
         }
 
-        if (Input.GetKeyDown(down))
+        if (Input.GetKeyDown(block))
         {
             SendMoveCommand(invoker.transform, Vector3.back, 1f);
             SendOppCommand(opponent.transform, Vector3.back, 1f);
@@ -66,16 +78,17 @@ public class InputManager : MonoBehaviour
             time = 0;
         }
 
-        if (Input.GetKeyDown(punch))
+        if (Input.GetKeyDown(lightAttack))
         {
-            SendFightCommand(PlayerArm.GetComponent<Transform>(), Vector3.right, 1f);
-            SendOppCommand(opponent.transform, Vector3.left, 1f);
+            playerAnim.SetTrigger("Attack");
+            // SendFightCommand(PlayerArm.GetComponent<Transform>(), Vector3.right, 1f);
+            // SendOppCommand(opponent.transform, Vector3.left, 1f);
             time = 0;
         }
         if (Input.GetKeyDown(kick))
         {
-            SendMoveCommand(invoker.transform, Vector3.right, 1f);
-            SendOppCommand(opponent.transform, Vector3.left, 1f);
+            // SendMoveCommand(invoker.transform, Vector3.right, 1f);
+            // SendOppCommand(opponent.transform, Vector3.left, 1f);
             time = 0;
         }
 
@@ -83,8 +96,8 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(replay))
         {
-            resetCommand(invoker.transform, startPoint);
-            resetCommand(opponent.transform, oppStartPoint);
+            resetCommand(invoker.transform, playerStart);
+            resetCommand(opponent.transform, oppStart);
             replayCommand();
         }
 
@@ -92,6 +105,11 @@ public class InputManager : MonoBehaviour
         
 
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 
     private void SendMoveCommand(Transform objectToMove, Vector3 direction, float distance)
