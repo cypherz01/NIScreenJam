@@ -45,14 +45,14 @@ public class Invoker : MonoBehaviour
     {
         co_running = true;
         yield return new WaitForSeconds(0.3f);
-       
-        foreach (ICommand command in oppCommandBuffer)
+
+        do
         {
-            command.Execute();
+            ICommand c = oppCommandBuffer.Dequeue();
+            c.Execute();
             yield return new WaitForSeconds(0.3f);
 
-        }
-        oppCommandBuffer.Clear();
+        } while (oppCommandBuffer.Count > 0);
         co_running = false;
     }
 }
