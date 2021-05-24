@@ -36,15 +36,15 @@ public class Invoker : MonoBehaviour
                 c.Execute();
             }
         
-        if (!co_running) StartCoroutine(placeholder1());
+
+        if (!co_running && oppCommandBuffer.Count > 0 ) StartCoroutine(placeholder1());
 
     }
 
-    IEnumerator placeholder1() // weird syntax for this but its needed.
+    IEnumerator placeholder1()
     {
         co_running = true;
         yield return new WaitForSeconds(0.3f);
-        int i = 0;
        
         foreach (ICommand command in oppCommandBuffer)
         {
@@ -54,6 +54,5 @@ public class Invoker : MonoBehaviour
         }
         oppCommandBuffer.Clear();
         co_running = false;
-         //this is were the wait will happen. so position it in your func where you want to wait.
     }
 }
