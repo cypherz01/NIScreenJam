@@ -50,7 +50,7 @@ public class Jump : ICommand
         {
             count++;
             yield return null;
-        } while (count <20);
+        } while (count < 20);
     }
 
 }
@@ -63,7 +63,7 @@ public class Punch : ICommand
     private LayerMask enemyLayers;
     private Transform attackPoint;
 
-    public Punch(GameObject player,Animator animator,Transform attackPoint, LayerMask enemyLayers)
+    public Punch(GameObject player, Animator animator, Transform attackPoint, LayerMask enemyLayers)
     {
         this.animator = animator;
         this.player = player;
@@ -73,19 +73,21 @@ public class Punch : ICommand
 
     public void Execute()
     {
-        Collider2D hitEnemy = Physics2D.OverlapArea(attackPoint.position, attackPoint.position+ new Vector3(0.5f,0.5f,0), enemyLayers);
+        Collider2D hitEnemy = Physics2D.OverlapArea(attackPoint.position, attackPoint.position + new Vector3(0.5f, 0, 0), enemyLayers);
 
-        if(!(hitEnemy == null))
+        if (!(hitEnemy == null))
         {
-            if (hitEnemy.GetComponent<Animation>().Equals("Block"))
+            if (hitEnemy.GetComponent<Animator>().GetBool("isblocking"))
             {
                 hitEnemy.GetComponent<SpriteRenderer>().color = Color.blue;
+                hitEnemy.GetComponent<Animator>().SetBool("isblocking", false);
             }
             else
             {
                 hitEnemy.GetComponent<SpriteRenderer>().color = Color.red;
                 hitEnemy.GetComponent<Health>().loseHealth();
             }
+
         }
         animator.SetTrigger("Attack");
     }
@@ -96,7 +98,7 @@ public class Block : ICommand
     [SerializeField]
     private Animator animator;
 
-    public Block( Animator animator)
+    public Block(Animator animator)
     {
         this.animator = animator;
     }
@@ -104,7 +106,7 @@ public class Block : ICommand
     public void Execute()
     {
         Debug.Log("blocking");
-        animator.SetBool("isblocking",true);
+        animator.SetBool("isblocking", true);
     }
 }
 
@@ -143,7 +145,7 @@ public class Reset : ICommand
 
     public void Execute()
     {
-        temp= startPoint.position;
+        temp = startPoint.position;
         objectToMove.position = startPoint.position;
     }
 }

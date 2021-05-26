@@ -80,21 +80,19 @@ public class InputManager : MonoBehaviour
         text.text = "iteration:" + iteration;
         text2.text = "moves left:" + moveCount;
 
-        if (player.GetComponent<SpriteRenderer>().color == Color.red && count == 5)
+        if (player.GetComponent<SpriteRenderer>().color != Color.white && count == 5)
         {
             player.GetComponent<SpriteRenderer>().color = Color.white;
             count = 0;
         }
+        if (player.GetComponent<SpriteRenderer>().color != Color.white && count < 5) count++;
 
-        if (player.GetComponent<SpriteRenderer>().color == Color.red && count < 5) count++;
-
-        if (opponent.GetComponent<SpriteRenderer>().color == Color.red && oppcount == 5)
+        if (opponent.GetComponent<SpriteRenderer>().color != Color.white && oppcount == 5)
         {
             opponent.GetComponent<SpriteRenderer>().color = Color.white;
             oppcount = 0;
         }
-
-        if (opponent.GetComponent<SpriteRenderer>().color == Color.red && oppcount < 5) oppcount++;
+        if (opponent.GetComponent<SpriteRenderer>().color != Color.white && oppcount < 5) oppcount++;
 
     }
 
@@ -131,13 +129,13 @@ public class InputManager : MonoBehaviour
             {
                 SendBlockCommand(player.GetComponent<Animator>(),true);
                 SendBlockCommand(opponent.GetComponent<Animator>(),false);
+                moveCount--;
             }
 
-            if (Input.GetKeyUp(block) && moveCount > 0)
+            if (Input.GetKeyUp(block))
             {
                 SendUnblockCommand(player.GetComponent<Animator>(),true);
                 SendUnblockCommand(opponent.GetComponent<Animator>(),false);
-                moveCount--;
             }
 
             if (Input.GetKeyDown(left) && moveCount > 0)

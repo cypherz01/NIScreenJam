@@ -184,6 +184,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 50512961935941442, guid: 2e2183501755a214591e802f3aff33d2,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 61368513597639598, guid: 2e2183501755a214591e802f3aff33d2,
         type: 3}
       propertyPath: m_IsTrigger
@@ -282,7 +287,7 @@ MonoBehaviour:
   moveCount: 4
   moveCountMax: 1
   iteration: 0
-  jumpForce: 5
+  jumpForce: 6
   groundCheck: {fileID: 1661957716}
   canReplay: 0
   enemylayers:
@@ -776,6 +781,11 @@ PrefabInstance:
     - target: {fileID: 4588935210562790, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50959880312528810, guid: 3248535f6a2562c489a1223a75951ef2,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1220751200322492485, guid: 3248535f6a2562c489a1223a75951ef2,
         type: 3}

@@ -46,7 +46,7 @@ public class Invoker : MonoBehaviour
     IEnumerator placeholder1()
     {
         co_running = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.85f);
 
         do
         {
@@ -59,7 +59,7 @@ public class Invoker : MonoBehaviour
             {
                 ICommand c = oppCommandBuffer.Dequeue();
                 c.Execute();
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.85f);
             }
 
 
