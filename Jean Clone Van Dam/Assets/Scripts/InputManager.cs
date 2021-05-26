@@ -1,9 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public enum GameState
+    {
+        STATE_WON,
+        STATE_LOST,
+        STATE_PLAYING
+    }
+
     [SerializeField]
     public String jump;
     [SerializeField]
@@ -30,39 +38,48 @@ public class InputManager : MonoBehaviour
 
     public int moveCount;
     public int moveCountMax;
+    public int iteration;
     private int count;
     private int oppcount;
-    public int iteration;
 
-    [SerializeField]
     public float jumpForce;
+
     public GroundCheck groundCheck;
+
     private Invoker Invoker;
+
+    public bool canReplay;
+    private bool isflipped;
 
     public LayerMask enemylayers;
     public LayerMask playerLayer;
 
+    public GameState gameState;
+
+    public Text text;
+    public Text text2;
 
     public List<ICommand> commands = new List<ICommand>();
 
-    private float time = 0;
-
     private void Start()
-    {
+    {   
+        gameState = GameState.STATE_PLAYING;
+        canReplay = true;
+        isflipped = false;
         iteration = 0;
         count = 0;
         oppcount = 0;
         player.transform.position = playerStart.position;
         opponent.transform.position = oppStart.position;
-
         Invoker = player.GetComponent<Invoker>();
         moveCount = moveCountMax;
-
-        
     }
 
     private void FixedUpdate()
     {
+        text.text = "iteration:" + iteration;
+        text2.text = "moves left:" + moveCount;
+
         if (player.GetComponent<SpriteRenderer>().color == Color.red && count == 5)
         {
             player.GetComponent<SpriteRenderer>().color = Color.white;
@@ -85,118 +102,130 @@ public class InputManager : MonoBehaviour
     void Update()
     {
 
-
-
-        if (Input.GetKeyDown(jump) && groundCheck.isGrounded && moveCount >0)
+        if (gameState.Equals(GameState.STATE_PLAYING))
         {
-            SendJumpCommand(player.GetComponent<Rigidbody2D>(), jumpForce, groundCheck);
-            SendOppJumpCommand(opponent.GetComponent<Rigidbody2D>(), jumpForce, groundCheck);
-            groundCheck.isGrounded = false;
-            moveCount--;
-            time = 0;
-        }
-
-        if (Input.GetKeyDown(block) && moveCount > 0)
-        {
-            SendMoveCommand(player.transform, Vector3.back, 1f);
-            SendOppCommand(opponent.transform, Vector3.back, 1f);
-            moveCount--;
-            time = 0;
-        }
-        if (Input.GetKeyDown(left) && moveCount > 0)
-         {
-            SendMoveCommand(player.transform, Vector3.left, 1f);
-            SendOppCommand(opponent.transform, Vector3.right, 1f);
-            moveCount--;
-            time = 0;
-        }
-        if (Input.GetKeyDown(right) && moveCount > 0)
-        {
-            SendMoveCommand(player.transform, Vector3.right, 1f);
-            SendOppCommand(opponent.transform, Vector3.left, 1f);
-            moveCount--;
-            time = 0;
-        }
-
-        if (Input.GetKeyDown(lightAttack) && moveCount > 0)
-        {
-            Collider2D[] hitEnemies = Physics2D.OverlapAreaAll(player.transform.Find("attack point").position, new Vector2(1, 1), enemylayers);
-
-            foreach(Collider2D enemy in hitEnemies)
+            if ((opponent.transform.position.x - player.transform.position.x) < 0 && (!isflipped))
             {
-                enemy.GetComponent<Health>().loseHealth();
+
+                player.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                opponent.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                isflipped = true;
             }
 
-            SendFightCommand(player,player.GetComponent<Animator>(),enemylayers) ;
-            SendOppFightCommand(opponent,opponent.GetComponent<Animator>(),playerLayer);
-            moveCount--;
-            time = 0;
+            if ((opponent.transform.position.x - player.transform.position.x) > 0 && (isflipped))
+            {
+                player.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                opponent.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                isflipped = false;
+            }
+
+            if (Input.GetKeyDown(jump) && groundCheck.isGrounded && moveCount > 0)
+            {
+                SendJumpCommand(player.GetComponent<Rigidbody2D>(),jumpForce,groundCheck,true);
+                SendJumpCommand(opponent.GetComponent<Rigidbody2D>(),jumpForce,groundCheck, false);
+                groundCheck.isGrounded = false;
+                moveCount--;
+            }
+
+            if (Input.GetKeyDown(block) && moveCount > 0)
+            {
+                SendBlockCommand(player.GetComponent<Animator>(),true);
+                SendBlockCommand(opponent.GetComponent<Animator>(),false);
+            }
+
+            if (Input.GetKeyUp(block) && moveCount > 0)
+            {
+                SendUnblockCommand(player.GetComponent<Animator>(),true);
+                SendUnblockCommand(opponent.GetComponent<Animator>(),false);
+                moveCount--;
+            }
+
+            if (Input.GetKeyDown(left) && moveCount > 0)
+            {
+                SendMoveCommand(player.transform, Vector3.left, 1f,true);
+                SendMoveCommand(opponent.transform, Vector3.right, 1f,false);
+                moveCount--;
+            }
+
+            if (Input.GetKeyDown(right) && moveCount > 0)
+            {
+                SendMoveCommand(player.transform, Vector3.right, 1f,true);
+                SendMoveCommand(opponent.transform, Vector3.left, 1f,false);
+                moveCount--;
+            }
+
+            if (Input.GetKeyDown(lightAttack) && moveCount > 0)
+            {
+                SendFightCommand(player, player.GetComponent<Animator>(), player.transform.Find("attack point"), enemylayers,true);
+                SendFightCommand(opponent, opponent.GetComponent<Animator>(), opponent.transform.Find("Attack point"), playerLayer,false);
+                moveCount--;
+            }
+
+            if (Input.GetKeyDown(replay) && canReplay)
+            {
+                canReplay = false;
+                resetCommand(player.transform, playerStart);
+                resetCommand(opponent.transform, oppStart);
+                replayCommand();
+                iteration++;
+                moveCountMax++;
+                moveCount = moveCountMax;
+            }
+
+            if (player.GetComponent<Health>().currentHealth == 0) gameState = GameState.STATE_LOST;
+            if (opponent.GetComponent<Health>().currentHealth == 0) gameState = GameState.STATE_WON;
         }
-        if (Input.GetKeyDown(kick))
+
+        if (gameState.Equals(GameState.STATE_LOST)) 
         {
-            // SendMoveCommand(invoker.transform, Vector3.right, 1f);
-            // SendOppCommand(opponent.transform, Vector3.left, 1f);
-            time = 0;
+
+            Debug.Log("PLAYER LOST");
         }
-
-
-
-        if (Input.GetKeyDown(replay))
+        if (gameState.Equals(GameState.STATE_WON))
         {
-            resetCommand(player.transform, playerStart);
-            resetCommand(opponent.transform, oppStart);
-            iteration++;
-            Debug.Log("iteration num :" + iteration);
-
-            replayCommand();
-            moveCountMax++;
-            moveCount = moveCountMax;
+            Debug.Log("PLAYER WON");
         }
-
-        time = time + Time.deltaTime;
-        
-
-
     }
 
-    private void SendMoveCommand(Transform objectToMove, Vector3 direction, float distance)
+    private void SendMoveCommand(Transform objectToMove, Vector3 direction, float distance,bool isplayer)
     {
         ICommand movement = new Move(objectToMove, direction, distance);
-        Invoker.AddCommand(movement);
+        if (isplayer) Invoker.AddCommand(movement);
+        else commands.Add(movement);
     }
-    private void SendFightCommand(GameObject objectAttack, Animator selectedAnimator, LayerMask enemyLayers)
+    private void SendFightCommand(GameObject objectAttack, Animator selectedAnimator,Transform attackPoint, LayerMask enemyLayers, bool isplayer)
     {
-        ICommand animation = new Punch(objectAttack, selectedAnimator, enemyLayers);
-        Invoker.AddCommand(animation);
+        ICommand animation = new Punch(objectAttack, selectedAnimator,attackPoint, enemyLayers);
+        if (isplayer) Invoker.AddCommand(animation);
+        else commands.Add(animation);
     }
-    private void SendJumpCommand(Rigidbody2D objectToMove, float jumpForce, bool groundCheck)
+    private void SendJumpCommand(Rigidbody2D objectToMove, float jumpForce, bool groundCheck,bool isplayer)
     {
         ICommand movement = new Jump(objectToMove,jumpForce,groundCheck);
-        Invoker.AddCommand(movement);
+        if(isplayer) Invoker.AddCommand(movement);
+        else commands.Add(movement);
     }
-    private void SendOppJumpCommand(Rigidbody2D objectToMove, float jumpForce, bool groundCheck)
+
+    private void SendBlockCommand(Animator selectedAnimator, bool isplayer)
     {
-        ICommand movement = new Jump(objectToMove, jumpForce, groundCheck);
-        commands.Add(movement);
+        ICommand animation = new Block(selectedAnimator);
+        if (isplayer) Invoker.AddCommand(animation);
+        else commands.Add(animation);
     }
-    private void SendOppCommand(Transform oppToMove, Vector3 direction, float distance)
+
+    private void SendUnblockCommand(Animator selectedAnimator, bool isplayer)
     {
-        ICommand oppMovement = new Move(oppToMove, direction, distance);
-        commands.Add(oppMovement);
+        ICommand animation = new Unblock(selectedAnimator);
+        if (isplayer) Invoker.AddCommand(animation);
+        else commands.Add(animation);
     }
-    private void SendOppFightCommand(GameObject objectAttack, Animator selectedAnimator, LayerMask enemyLayers)
-    {
-        ICommand animation = new Punch(objectAttack, selectedAnimator, enemyLayers);
-        commands.Add(animation);
-    }
+
     private void replayCommand()
     {
         foreach(ICommand command in commands)
         {
             Invoker.AddOppCommand(command);
- 
         }
-        //commands.Clear();
 
     }
     private void resetCommand(Transform objectToMove, Transform startPoint)

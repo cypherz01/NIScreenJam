@@ -21,11 +21,6 @@ public class Move : ICommand
         objectToMove.position += direction * distance;
     }
 
-    public void Undo()
-    {
-        objectToMove.position -= direction * distance;
-    }
-
 }
 
 public class Jump : ICommand
@@ -48,10 +43,6 @@ public class Jump : ICommand
         WaitForlanding();
     }
 
-    public void Undo()
-    {
-    }
-
     private IEnumerator WaitForlanding()
     {
         int count = 0;
@@ -70,29 +61,66 @@ public class Punch : ICommand
     private Animator animator;
     private GameObject player;
     private LayerMask enemyLayers;
+    private Transform attackPoint;
 
-    public Punch(GameObject player,Animator animator, LayerMask enemyLayers)
+    public Punch(GameObject player,Animator animator,Transform attackPoint, LayerMask enemyLayers)
     {
         this.animator = animator;
         this.player = player;
+        this.attackPoint = attackPoint;
         this.enemyLayers = enemyLayers;
     }
 
     public void Execute()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapAreaAll(player.transform.Find("attack point").position, new Vector2(1, 1), enemyLayers);
+        Collider2D hitEnemy = Physics2D.OverlapArea(attackPoint.position, attackPoint.position+ new Vector3(0.5f,0.5f,0), enemyLayers);
 
-        foreach (Collider2D enemy in hitEnemies)
+        if(!(hitEnemy == null))
         {
-            enemy.GetComponent<SpriteRenderer>().color = Color.red;
-            enemy.GetComponent<Health>().loseHealth();
+            if (hitEnemy.GetComponent<Animation>().Equals("Block"))
+            {
+                hitEnemy.GetComponent<SpriteRenderer>().color = Color.blue;
+            }
+            else
+            {
+                hitEnemy.GetComponent<SpriteRenderer>().color = Color.red;
+                hitEnemy.GetComponent<Health>().loseHealth();
+            }
         }
         animator.SetTrigger("Attack");
     }
+}
 
-    public void Undo()
+public class Block : ICommand
+{
+    [SerializeField]
+    private Animator animator;
+
+    public Block( Animator animator)
     {
-   
+        this.animator = animator;
+    }
+
+    public void Execute()
+    {
+        Debug.Log("blocking");
+        animator.SetBool("isblocking",true);
+    }
+}
+
+public class Unblock : ICommand
+{
+    [SerializeField]
+    private Animator animator;
+
+    public Unblock(Animator animator)
+    {
+        this.animator = animator;
+    }
+
+    public void Execute()
+    {
+        animator.SetBool("isblocking", false);
     }
 
 }
@@ -118,10 +146,4 @@ public class Reset : ICommand
         temp= startPoint.position;
         objectToMove.position = startPoint.position;
     }
-
-    public void Undo()
-    {
-        objectToMove.position =temp;
-    }
-
 }

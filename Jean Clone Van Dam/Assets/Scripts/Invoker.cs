@@ -9,7 +9,9 @@ public class Invoker : MonoBehaviour
     static Queue<ICommand> oppCommandBuffer;
 
     public List<float> actionTimes;
+    public InputManager inputManager;
     private bool co_running = false;
+
 
 
     private void Awake()
@@ -31,28 +33,38 @@ public class Invoker : MonoBehaviour
     private void FixedUpdate()
     {
         if (commandBuffer.Count > 0)
-            {
-                ICommand c = commandBuffer.Dequeue();
-                c.Execute();
-            }
-        
+        {
+            ICommand c = commandBuffer.Dequeue();
+            c.Execute();
+        }
 
-        if (!co_running && oppCommandBuffer.Count > 0 ) StartCoroutine(placeholder1());
+
+        if (!co_running && oppCommandBuffer.Count > 0) StartCoroutine(placeholder1());
 
     }
 
     IEnumerator placeholder1()
     {
         co_running = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
 
         do
         {
-            ICommand c = oppCommandBuffer.Dequeue();
-            c.Execute();
-            yield return new WaitForSeconds(0.3f);
+            if (!inputManager.gameState.ToString().Equals("STATE_PLAYING"))
+            {
+                oppCommandBuffer.Clear();
+            }
+
+            if ((oppCommandBuffer.Count > 0))
+            {
+                ICommand c = oppCommandBuffer.Dequeue();
+                c.Execute();
+                yield return new WaitForSeconds(1f);
+            }
+
 
         } while (oppCommandBuffer.Count > 0);
         co_running = false;
+        inputManager.canReplay = true;
     }
 }

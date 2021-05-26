@@ -8,7 +8,6 @@ public class Health : MonoBehaviour
     public int currentHealth;
     private Animator animator;
     private bool alive;
-    // Start is called before the first frame update
     void Start()
     {
         alive = true;
@@ -31,6 +30,5 @@ public class Health : MonoBehaviour
     {
         animator.SetTrigger("Death");
         alive = false;
-
     }
 }
