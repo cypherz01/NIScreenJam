@@ -41,8 +41,10 @@ public class InputManager : MonoBehaviour
     public int iteration;
     private int count;
     private int oppcount;
+    private int attackCount;
 
     public float jumpForce;
+    public bool canAttack;
 
     public GroundCheck groundCheck;
 
@@ -65,10 +67,12 @@ public class InputManager : MonoBehaviour
     {   
         gameState = GameState.STATE_PLAYING;
         canReplay = true;
+        canAttack = true;
         isflipped = false;
         iteration = 0;
         count = 0;
         oppcount = 0;
+        attackCount = 0;
         player.transform.position = playerStart.position;
         opponent.transform.position = oppStart.position;
         Invoker = player.GetComponent<Invoker>();
@@ -80,19 +84,23 @@ public class InputManager : MonoBehaviour
         text.text = "iteration:" + iteration;
         text2.text = "moves left:" + moveCount;
 
-        if (player.GetComponent<SpriteRenderer>().color != Color.white && count == 5)
+        if (player.GetComponent<SpriteRenderer>().color != Color.white && count == 10)
         {
             player.GetComponent<SpriteRenderer>().color = Color.white;
             count = 0;
         }
-        if (player.GetComponent<SpriteRenderer>().color != Color.white && count < 5) count++;
+        if (player.GetComponent<SpriteRenderer>().color != Color.white && count < 10) count++;
 
-        if (opponent.GetComponent<SpriteRenderer>().color != Color.white && oppcount == 5)
+        if (opponent.GetComponent<SpriteRenderer>().color != Color.white && oppcount == 10)
         {
             opponent.GetComponent<SpriteRenderer>().color = Color.white;
             oppcount = 0;
         }
-        if (opponent.GetComponent<SpriteRenderer>().color != Color.white && oppcount < 5) oppcount++;
+        if (opponent.GetComponent<SpriteRenderer>().color != Color.white && oppcount < 10) oppcount++;
+
+
+        if (attackCount == 40) canAttack = true;
+        if (attackCount < 40) attackCount++;
 
     }
 
@@ -117,13 +125,13 @@ public class InputManager : MonoBehaviour
                 isflipped = false;
             }
 
-            if (Input.GetKeyDown(jump) && groundCheck.isGrounded && moveCount > 0)
+           /* if (Input.GetKeyDown(jump) && groundCheck.isGrounded && moveCount > 0)
             {
                 SendJumpCommand(player.GetComponent<Rigidbody2D>(),jumpForce,groundCheck,true);
                 SendJumpCommand(opponent.GetComponent<Rigidbody2D>(),jumpForce,groundCheck, false);
                 groundCheck.isGrounded = false;
                 moveCount--;
-            }
+            }*/
 
             if (Input.GetKeyDown(block) && moveCount > 0)
             {
@@ -152,8 +160,10 @@ public class InputManager : MonoBehaviour
                 moveCount--;
             }
 
-            if (Input.GetKeyDown(lightAttack) && moveCount > 0)
+            if (Input.GetKeyDown(lightAttack) && moveCount > 0 && canAttack)
             {
+                canAttack = false;
+                attackCount = 0;
                 SendFightCommand(player, player.GetComponent<Animator>(), player.transform.Find("attack point"), enemylayers,true);
                 SendFightCommand(opponent, opponent.GetComponent<Animator>(), opponent.transform.Find("Attack point"), playerLayer,false);
                 moveCount--;
@@ -162,8 +172,6 @@ public class InputManager : MonoBehaviour
             if (Input.GetKeyDown(replay) && canReplay)
             {
                 canReplay = false;
-                resetCommand(player.transform, playerStart);
-                resetCommand(opponent.transform, oppStart);
                 replayCommand();
                 iteration++;
                 moveCountMax++;
